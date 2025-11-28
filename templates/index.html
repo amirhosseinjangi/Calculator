@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>ماشین حساب وب</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-container">
+    <div class="calculator-card">
+        <h1>ماشین حساب</h1>
+
+        <form method="POST" id="calc-form">
+            <div class="display-wrapper">
+                <input
+                    type="text"
+                    id="display"
+                    name="expression"
+                    value="{{ expression }}"
+                    readonly
+                >
+                {% if error %}
+                    <div class="message error">{{ error }}</div>
+                {% elif result %}
+                    <div class="message result">= {{ result }}</div>
+                {% endif %}
+            </div>
+
+            <div class="buttons-grid">
+                <button type="button" data-action="clear" class="btn func">C</button>
+                <button type="button" data-action="back" class="btn func">⌫</button>
+                <button type="button" data-value="sin(" class="btn func">sin</button>
+                <button type="button" data-value="tan(" class="btn func">tan</button>
+
+                <button type="button" data-value="7" class="btn num">7</button>
+                <button type="button" data-value="8" class="btn num">8</button>
+                <button type="button" data-value="9" class="btn num">9</button>
+                <button type="button" data-value="/" class="btn op">÷</button>
+
+                <button type="button" data-value="4" class="btn num">4</button>
+                <button type="button" data-value="5" class="btn num">5</button>
+                <button type="button" data-value="6" class="btn num">6</button>
+                <button type="button" data-value="*" class="btn op">×</button>
+
+                <button type="button" data-value="1" class="btn num">1</button>
+                <button type="button" data-value="2" class="btn num">2</button>
+                <button type="button" data-value="3" class="btn num">3</button>
+                <button type="button" data-value="-" class="btn op">−</button>
+
+                <button type="button" data-value="0" class="btn num">0</button>
+                <button type="button" data-value="." class="btn num">.</button>
+                <button type="button" data-action="equals" class="btn equal">=</button>
+                <button type="button" data-value="+" class="btn op">+</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+    const form = document.getElementById('calc-form');
+
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.getAttribute('data-action');
+            const value = btn.getAttribute('data-value');
+
+            if (action === 'clear') {
+                display.value = '';
+            } else if (action === 'back') {
+                display.value = display.value.slice(0, -1);
+            } else if (action === 'equals') {
+                form.submit();
+            } else if (value) {
+                display.value += value;
+            }
+        });
+    });
+</script>
+</body>
+</html>
