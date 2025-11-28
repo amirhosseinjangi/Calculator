@@ -3,7 +3,7 @@ name: CD-Liara
 on:
   push:
     branches:
-      - main # اگر branch اصلی‌ات اسمش چیز دیگه است (مثلاً master) اینجا عوضش کن
+      - main
 
 jobs:
   deploy:
