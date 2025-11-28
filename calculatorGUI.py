@@ -1,14 +1,14 @@
 import tkinter as tk
 import math
 
-# --- توابع مثلثاتی بر اساس درجه (نه رادیان) ---
+
 def deg_sin(x):
     return math.sin(math.radians(x))
 
 def deg_tan(x):
     return math.tan(math.radians(x))
 
-# --- منطق ماشین حساب ---
+
 class Calculator:
     def __init__(self, root):
         self.root = root
@@ -22,7 +22,7 @@ class Calculator:
         self.create_widgets()
 
     def create_widgets(self):
-        # نمایشگر
+
         self.display = tk.Entry(
             self.root,
             font=("Segoe UI", 20),
@@ -38,13 +38,13 @@ class Calculator:
         btn_frame = tk.Frame(self.root, bg="#1e272e")
         btn_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
-        # تنظیمات ستون‌ها و ردیف‌ها
+
         for i in range(4):
             btn_frame.grid_columnconfigure(i, weight=1)
         for i in range(5):
             btn_frame.grid_rowconfigure(i, weight=1)
 
-        # مشخصات دکمه‌ها: متن روی دکمه، مقدار واقعی برای expression، ردیف، ستون، نوع
+
         buttons = [
             # text, value, row, col, style
             ("C",   "C",    0, 0, "func"),
@@ -129,7 +129,7 @@ class Calculator:
 
     def calculate(self):
         try:
-            # استفاده از eval با محیط محدود و تعریف sin و tan درجه‌ای
+
             result = eval(
                 self.expression,
                 {
@@ -146,7 +146,7 @@ class Calculator:
             self.expression = "Error"
         self.update_display()
 
-# --- اجرای برنامه ---
+
 if __name__ == "__main__":
     root = tk.Tk()
     calc = Calculator(root)
